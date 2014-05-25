@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <title>Jax Test</title>
+</head>
+
+<body></body>
+<script type="text/javascript" src="../build/jax.js"></script>
+<script type="text/javascript">
+(function() {
+
+// @TODO: Use a real testing framework. (and write real tests too)
+
+'use strict'
+
+try {
+  var req = jax({type:'GET', url:'sample.json'})
+  console.log(req)
+  req.then(function(response) {
+    console.log('response: ' , response)
+  })
+  req.fail(function() {
+    console.log('failed!')
+  })
+} catch(e) {
+  console.warn(e)
+}
+
+})()
+</script>
+</html>
