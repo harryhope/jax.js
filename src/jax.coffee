@@ -49,6 +49,11 @@ class Request
         else
           @failure.setData(@request.responseText, @request)
 
+    # Set headers if requested.
+    if @options.headers?
+      for key, value of @options.headers
+        @request.setRequestHeader(key, value)
+
     # Open a connection.
     @request.open(@options.type, @options.url, true)
 

@@ -5,6 +5,7 @@
 
   Request = (function() {
     function Request(options) {
+      var key, value, _ref;
       this.options = options;
       this.success = new Promise;
       this.failure = new Promise;
@@ -22,6 +23,13 @@
           }
         };
       })(this);
+      if (this.options.headers != null) {
+        _ref = this.options.headers;
+        for (key in _ref) {
+          value = _ref[key];
+          this.request.setRequestHeader(key, value);
+        }
+      }
       this.request.open(this.options.type, this.options.url, true);
       this.request.send(this.options.data);
     }
