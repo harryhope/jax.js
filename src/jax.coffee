@@ -32,7 +32,7 @@
 class Request
 
   constructor: (@options) ->
-    @success = new Promise
+    @successful = new Promise
     @failure = new Promise
     @request = new XMLHttpRequest
 
@@ -45,7 +45,7 @@ class Request
       # Route our response to the appropriate callback.
       if @request.readyState is 4
         if @request.status in successCodes
-          @success.setData(parse(@request.responseText), @request)
+          @successful.setData(parse(@request.responseText), @request)
         else
           @failure.setData(@request.responseText, @request)
 
@@ -61,8 +61,12 @@ class Request
     @request.send(@options.data)
 
 
-  then: (callback) ->
-    @success.setHandler(callback)
+  then: (successCallback, failCallback) ->
+    @successful.setHandler(successCallback)
+    @failure.setHandler(failCallback) if failCallback?
+
+  success: (callback) ->
+    @successful.setHandler(callback)
 
   fail: (callback) ->
     @failure.setHandler(callback)
@@ -96,7 +100,8 @@ class Promise
 
 # Helper function for parsing json.
 #
-#
+# @param [String] input
+# @return [String] response
 parse = (input) ->
   try
     response = JSON.parse(input)

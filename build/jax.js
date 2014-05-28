@@ -7,7 +7,7 @@
     function Request(options) {
       var key, value, _ref;
       this.options = options;
-      this.success = new Promise;
+      this.successful = new Promise;
       this.failure = new Promise;
       this.request = new XMLHttpRequest;
       this.request.onreadystatechange = (function(_this) {
@@ -16,7 +16,7 @@
           successCodes = [200, 304, 0];
           if (_this.request.readyState === 4) {
             if (_ref = _this.request.status, __indexOf.call(successCodes, _ref) >= 0) {
-              return _this.success.setData(parse(_this.request.responseText), _this.request);
+              return _this.successful.setData(parse(_this.request.responseText), _this.request);
             } else {
               return _this.failure.setData(_this.request.responseText, _this.request);
             }
@@ -34,8 +34,15 @@
       this.request.send(this.options.data);
     }
 
-    Request.prototype.then = function(callback) {
-      return this.success.setHandler(callback);
+    Request.prototype.then = function(successCallback, failCallback) {
+      this.successful.setHandler(successCallback);
+      if (failCallback != null) {
+        return this.failure.setHandler(failCallback);
+      }
+    };
+
+    Request.prototype.success = function(callback) {
+      return this.successful.setHandler(callback);
     };
 
     Request.prototype.fail = function(callback) {
