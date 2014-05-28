@@ -86,7 +86,11 @@
   })();
 
   parse = function(input) {
-    var error, response;
+    var error, response, safetyString;
+    safetyString = 'while(1);';
+    if (input.substring(0, safetyString.length) === safetyString) {
+      input = input.slice(safetyString.length);
+    }
     try {
       response = JSON.parse(input);
     } catch (_error) {

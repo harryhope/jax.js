@@ -77,7 +77,7 @@ class Request
 class Promise
 
   constructor: () ->
-    @done = false
+    @done = no
     @handler = null
     @data = null
     @obj = null
@@ -95,7 +95,7 @@ class Promise
     else
       @data = data
       @obj = obj
-      @done = true
+      @done = yes
     @
 
 # Helper function for parsing json.
@@ -103,6 +103,13 @@ class Promise
 # @param [String] input
 # @return [String] response
 parse = (input) ->
+
+  safetyString = 'while(1);'
+
+  # Remove a safety string to prevent a JSON vulnerability.
+  input = input.slice(safetyString.length) if input.substring(0, safetyString.length) is safetyString
+
+  # Attempt to parse a json string.
   try
     response = JSON.parse(input)
   catch error
