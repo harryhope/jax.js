@@ -23,6 +23,7 @@
           }
         };
       })(this);
+      this.request.open(this.options.type, this.options.url, true);
       if (this.options.headers != null) {
         _ref = this.options.headers;
         for (key in _ref) {
@@ -30,7 +31,6 @@
           this.request.setRequestHeader(key, value);
         }
       }
-      this.request.open(this.options.type, this.options.url, true);
       this.request.send(this.options.data);
     }
 

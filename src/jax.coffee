@@ -49,13 +49,13 @@ class Request
         else
           @failure.setData(@request.responseText, @request)
 
+    # Open a connection.
+    @request.open(@options.type, @options.url, true)
+
     # Set headers if requested.
     if @options.headers?
       for key, value of @options.headers
         @request.setRequestHeader(key, value)
-
-    # Open a connection.
-    @request.open(@options.type, @options.url, true)
 
     # Send data if POST'ing.
     @request.send(@options.data)
@@ -142,7 +142,7 @@ if module? and module.exports?
   module.exports = jax
 
 else if define? and define.amd?
-  define () -> jax
+  define(() -> jax)
 
 else
   window.jax = jax
