@@ -32,6 +32,12 @@
 class Request
 
   constructor: (@options) ->
+
+    defaults =
+      type: 'GET'
+      data: null
+      url: no
+
     @successful = new Promise
     @failure = new Promise
     @request = new XMLHttpRequest

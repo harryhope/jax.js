@@ -5,8 +5,13 @@
 
   Request = (function() {
     function Request(options) {
-      var key, value, _ref;
+      var defaults, key, value, _ref;
       this.options = options;
+      defaults = {
+        type: 'GET',
+        data: null,
+        url: false
+      };
       this.successful = new Promise;
       this.failure = new Promise;
       this.request = new XMLHttpRequest;
