@@ -42,6 +42,8 @@ class Request
     @failure = new Promise
     @request = new XMLHttpRequest
 
+    @options = merge(defaults, @options)
+
     # Set handlers.
     @request.onreadystatechange = () =>
 
@@ -113,7 +115,8 @@ parse = (input) ->
   safetyString = 'while(1);'
 
   # Remove a safety string to prevent a JSON vulnerability.
-  input = input.slice(safetyString.length) if input.substring(0, safetyString.length) is safetyString
+  if input.substring(0, safetyString.length) is safetyString
+    input = input.slice(safetyString.length)
 
   # Attempt to parse a json string.
   try
@@ -121,6 +124,17 @@ parse = (input) ->
   catch error
     response = input
   response
+
+# Helper function that merges properties of one object
+# into another (a shallow copy).
+#
+# @param [Object] object
+# @param [Object] properties
+# @return [Object] object
+merge = (object, properties) ->
+  for key, value of properties
+    object[key] = value
+  object
 
 # Primary jax function.
 #
