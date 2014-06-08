@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var Promise, Request, jax, parse,
+  var Promise, Request, jax, merge, parse,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Request = (function() {
@@ -15,6 +15,7 @@
       this.successful = new Promise;
       this.failure = new Promise;
       this.request = new XMLHttpRequest;
+      this.options = merge(defaults, this.options);
       this.request.onreadystatechange = (function(_this) {
         return function() {
           var successCodes, _ref;
@@ -103,6 +104,15 @@
       response = input;
     }
     return response;
+  };
+
+  merge = function(object, properties) {
+    var key, value;
+    for (key in properties) {
+      value = properties[key];
+      object[key] = value;
+    }
+    return object;
   };
 
   jax = function(options) {
