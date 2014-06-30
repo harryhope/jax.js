@@ -45,10 +45,10 @@ class Request
     @options = merge(defaults, @options)
 
     # Set handlers.
-    @request.onreadystatechange = () =>
+    @request.onreadystatechange = =>
 
       # Server responses that indicate success.
-      successCodes = [200, 304, 0]
+      successCodes = [200, 304]
 
       # Route our response to the appropriate callback.
       if @request.readyState is 4
@@ -84,7 +84,7 @@ class Request
 # @param [Object] options
 class Promise
 
-  constructor: () ->
+  constructor: ->
     @done = no
     @handler = null
     @data = null

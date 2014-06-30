@@ -19,7 +19,7 @@
       this.request.onreadystatechange = (function(_this) {
         return function() {
           var successCodes, _ref;
-          successCodes = [200, 304, 0];
+          successCodes = [200, 304];
           if (_this.request.readyState === 4) {
             if (_ref = _this.request.status, __indexOf.call(successCodes, _ref) >= 0) {
               return _this.successful.setData(parse(_this.request.responseText), _this.request);
