@@ -33,10 +33,10 @@ describe 'Jax', ->
       'responseText': 'error!'
 
     jax.get('/test/url/2').then (data) ->
-       succeed(data);
+       succeed(data)
 
     jax.get('/test/url/2').fail (data) ->
-       fail(data);
+       fail(data)
 
     expect(succeed).not.toHaveBeenCalledWith('error!')
     expect(fail).toHaveBeenCalledWith('error!')
