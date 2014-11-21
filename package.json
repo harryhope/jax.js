@@ -5,5 +5,9 @@
     "grunt": "~0.4.2",
     "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-watch": "~0.5.3"
+  },
+  "dependencies": {
+    "coffeelint": "^1.6.1",
+    "grunt-coffeelint": "0.0.13"
   }
 }
