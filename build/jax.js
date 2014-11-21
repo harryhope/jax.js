@@ -1,7 +1,8 @@
 (function() {
   'use strict';
-  var Promise, Request, jax, merge, parse,
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  var Promise, Request, isArray, jax, merge, parameterize, parse,
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+    __hasProp = {}.hasOwnProperty;
 
   Request = (function() {
     function Request(options) {
@@ -37,22 +38,25 @@
           this.request.setRequestHeader(key, value);
         }
       }
-      this.request.send(this.options.data);
+      this.request.send(parameterize(this.options.data));
     }
 
     Request.prototype.then = function(successCallback, failCallback) {
       this.successful.setHandler(successCallback);
       if (failCallback != null) {
-        return this.failure.setHandler(failCallback);
+        this.failure.setHandler(failCallback);
       }
+      return this;
     };
 
     Request.prototype.success = function(callback) {
-      return this.successful.setHandler(callback);
+      this.successful.setHandler(callback);
+      return this;
     };
 
     Request.prototype.fail = function(callback) {
-      return this.failure.setHandler(callback);
+      this.failure.setHandler(callback);
+      return this;
     };
 
     return Request;
@@ -106,6 +110,42 @@
     return response;
   };
 
+  parameterize = function(input) {
+    var add, index, key, result, spaceChars, value, _i, _len;
+    if (typeof input === 'string') {
+      return input;
+    }
+    if (typeof input === 'function') {
+      input = input();
+    }
+    result = [];
+    spaceChars = /%20/g;
+    add = function(key, value) {
+      if (typeof value === 'function') {
+        value = value();
+      }
+      if (value === null) {
+        value = '';
+      }
+      key = encodeURIComponent(key);
+      value = encodeURIComponent(value);
+      return result[result.length] = "" + key + "=" + value;
+    };
+    if (isArray(input)) {
+      for (index = _i = 0, _len = input.length; _i < _len; index = ++_i) {
+        value = input[index];
+        add(index, value);
+      }
+    } else if (typeof input === 'object') {
+      for (key in input) {
+        if (!__hasProp.call(input, key)) continue;
+        value = input[key];
+        add(key, value);
+      }
+    }
+    return result.join('&').replace(spaceChars, '+');
+  };
+
   merge = function(object, properties) {
     var key, value;
     for (key in properties) {
@@ -113,6 +153,10 @@
       object[key] = value;
     }
     return object;
+  };
+
+  isArray = function(item) {
+    return Object.prototype.toString.call(item) === '[object Array]';
   };
 
   jax = function(options) {

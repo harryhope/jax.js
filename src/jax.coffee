@@ -66,18 +66,20 @@ class Request
         @request.setRequestHeader(key, value)
 
     # Send data if POST'ing.
-    @request.send(@options.data)
-
+    @request.send(parameterize(@options.data))
 
   then: (successCallback, failCallback) ->
     @successful.setHandler(successCallback)
     @failure.setHandler(failCallback) if failCallback?
+    return this
 
   success: (callback) ->
     @successful.setHandler(callback)
+    return this
 
   fail: (callback) ->
     @failure.setHandler(callback)
+    return this
 
 # A simple stand-alone promise implementation.
 #
@@ -95,7 +97,7 @@ class Promise
       callback(@data, @obj)
     else
       @handler = callback
-    @
+    return this
 
   setData: (data, obj) ->
     if @handler isnt null
@@ -104,7 +106,7 @@ class Promise
       @data = data
       @obj = obj
       @done = yes
-    @
+    return this
 
 # Helper function for parsing json.
 #
@@ -123,7 +125,34 @@ parse = (input) ->
     response = JSON.parse(input)
   catch error
     response = input
-  response
+  return response
+
+# Turn an object or array into a serialized string.
+#
+# @param input
+# @return [String]
+parameterize = (input) ->
+  return input if typeof input is 'string'
+
+  input = input() if typeof input is 'function'
+
+  result = []
+  spaceChars = /%20/g
+
+  add = (key, value) ->
+    value = value() if typeof value is 'function'
+    value = '' if value is null
+    key = encodeURIComponent(key)
+    value = encodeURIComponent(value)
+    result[result.length] = "#{key}=#{value}"
+
+  if isArray(input)
+    add(index, value) for value, index in input
+
+  else if typeof input is 'object'
+    add(key, value) for own key, value of input
+
+  return result.join('&').replace(spaceChars,'+')
 
 # Helper function that merges properties of one object
 # into another (a shallow copy).
@@ -134,14 +163,21 @@ parse = (input) ->
 merge = (object, properties) ->
   for key, value of properties
     object[key] = value
-  object
+  return object
+
+# Check if the item is an array.
+#
+# @param [Mixed] item
+# @return [Boolean]
+isArray = (item) ->
+  return Object.prototype.toString.call(item) is '[object Array]'
 
 # Primary jax function.
 #
 # @param [Object] options
 # @return [Request]
 jax = (options) ->
-  new Request options
+  return new Request options
 
 # Get request shorthand method.
 #
@@ -153,7 +189,7 @@ jax.get = (url) ->
     type: 'GET'
     url : url
 
-  new Request options
+  return new Request options
 
 # Post request shorthand method.
 #
@@ -166,7 +202,7 @@ jax.post = (url, data) ->
     url: url
     data: data
 
-  new Request options
+  return new Request options
 
 # Export as a CommonJS module, an AMD module, or
 # otherwise add it to the global (window) scope.
@@ -174,7 +210,7 @@ if module? and module.exports?
   module.exports = jax
 
 else if define? and define.amd?
-  define(() -> jax)
+  define -> jax
 
 else
   window.jax = jax
