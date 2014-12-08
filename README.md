@@ -1,7 +1,7 @@
 jax.js
 ===
 
-Jax is a tiny (~ 200 line) library for making ajax requests with an api like angular's $http library and built-in promises.
+Jax is a tiny library for making ajax requests with an api similar to angular's $http library.
 
 ## Usage
 
