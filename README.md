@@ -1,11 +1,11 @@
 jax.js
 ===
 
-Jax is a tiny library for making ajax requests with an api similar to angular's $http library.
+Jax is a tiny library for making ajax requests with an api similar to angular's $http.
 
 ## Usage
 
-- As a function, jax takes a single argument and exposes 2 methods for handling the response.
+- As a function, jax takes a single argument and exposes success and fail methods for handling the response.
 
 ```
 jax({type:'GET', url:'sample.json'})
@@ -23,7 +23,7 @@ jax({type:'GET', url:'sample.json'})
 jax({type:'GET', url:'sample.json'}).then(doSomething, doSomethingElseOnFailure);
 ```
 
-- Requests can be stored as a variable.
+- Requests work like promises.
 
 ```
 var req = jax({type:'GET', url:'sample.json'});
