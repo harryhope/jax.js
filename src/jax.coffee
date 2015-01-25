@@ -24,15 +24,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-'use strict'
-
 # Wrapper class for an xmlhttp request.
 #
 # @param [Object] options
 class Request
 
   constructor: (@options) ->
-
     defaults =
       type: 'GET'
       data: null
@@ -41,7 +38,6 @@ class Request
     @successful = new Promise
     @failure = new Promise
     @request = new XMLHttpRequest
-
     @options = merge(defaults, @options)
 
     # Set handlers.
@@ -113,7 +109,6 @@ class Promise
 # @param [String] input
 # @return [String] response
 parse = (input) ->
-
   safetyString = 'while(1);'
 
   # Remove a safety string to prevent a JSON vulnerability.
@@ -154,8 +149,7 @@ parameterize = (input) ->
 
   return result.join('&').replace(spaceChars,'+')
 
-# Helper function that merges properties of one object
-# into another (a shallow copy).
+# Merge properties of one object into another.
 #
 # @param [Object] object
 # @param [Object] properties
@@ -163,6 +157,7 @@ parameterize = (input) ->
 merge = (object, properties) ->
   for key, value of properties
     object[key] = value
+    
   return object
 
 # Check if the item is an array.
@@ -184,7 +179,6 @@ jax = (options) ->
 # @param [String] url
 # @return [Request]
 jax.get = (url) ->
-
   options =
     type: 'GET'
     url : url
@@ -196,7 +190,6 @@ jax.get = (url) ->
 # @param [String] url
 # @return [Request]
 jax.post = (url, data) ->
-
   options =
     type: 'POST'
     url: url
