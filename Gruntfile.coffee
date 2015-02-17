@@ -4,6 +4,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
+  grunt.loadNpmTasks 'grunt-contrib-clean'
 
   grunt.initConfig
     watch:
@@ -19,9 +20,16 @@ module.exports = (grunt) ->
         src: ['*.coffee']
         dest: 'build/'
         ext: '.js'
+      compileSpec:
+        expand: true
+        flatten: true
+        cwd: "#{__dirname}/spec/"
+        src: ['*.coffee']
+        dest: 'spec/'
+        ext: '.js'
 
     coffeelint:
-      app: ['src/*.coffee']
+      build: ['src/*.coffee']
 
     uglify:
       options:
@@ -36,4 +44,8 @@ module.exports = (grunt) ->
           specs: 'spec/jax-spec.js'
           vendor: ['node_modules/jasmine-ajax/lib/mock-ajax.js']
 
+    clean:
+      spec: ['spec/jax-spec.js']
+
   grunt.registerTask 'build', ['coffeelint', 'coffee:compile', 'uglify']
+  grunt.registerTask 'test', ['coffee:compileSpec', 'jasmine', 'clean:spec']
