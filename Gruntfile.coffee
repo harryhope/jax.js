@@ -1,13 +1,14 @@
 module.exports = (grunt) ->
-  grunt.loadNpmTasks('grunt-contrib-coffee')
-  grunt.loadNpmTasks('grunt-coffeelint')
-  grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-coffeelint'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   grunt.initConfig
     watch:
       coffee:
         files: 'src/*.coffee'
-        tasks: ['coffeelint', 'coffee:compile']
+        tasks: 'build'
 
     coffee:
       compile:
@@ -18,5 +19,13 @@ module.exports = (grunt) ->
         dest: 'build/'
         ext: '.js'
 
+    uglify:
+      options:
+        mangle: no
+      target:
+        files: 'build/jax.min.js': ['build/jax.js']
+
     coffeelint:
-      app: ['src/*.coffee'],
+      app: ['src/*.coffee']
+
+  grunt.registerTask 'build', ['coffeelint', 'coffee:compile', 'uglify']
