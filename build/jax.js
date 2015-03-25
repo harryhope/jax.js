@@ -171,12 +171,40 @@
     return new Request(options);
   };
 
+  jax.head = function(url) {
+    var options;
+    options = {
+      type: 'HEAD',
+      url: url
+    };
+    return new Request(options);
+  };
+
   jax.post = function(url, data) {
     var options;
     options = {
       type: 'POST',
       url: url,
       data: data
+    };
+    return new Request(options);
+  };
+
+  jax.put = function(url, data) {
+    var options;
+    options = {
+      type: 'PUT',
+      url: url,
+      data: data
+    };
+    return new Request(options);
+  };
+
+  jax["delete"] = function(url) {
+    var options;
+    options = {
+      type: 'DELETE',
+      url: url
     };
     return new Request(options);
   };

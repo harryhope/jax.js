@@ -157,7 +157,7 @@ parameterize = (input) ->
 merge = (object, properties) ->
   for key, value of properties
     object[key] = value
-    
+
   return object
 
 # Check if the item is an array.
@@ -185,15 +185,51 @@ jax.get = (url) ->
 
   return new Request options
 
+# Head request shorthand method.
+#
+# @param [String] url
+# @return [Request]
+jax.head = (url) ->
+  options =
+    type: 'HEAD'
+    url : url
+
+  return new Request options
+
 # Post request shorthand method.
 #
 # @param [String] url
+# @param [Object] data
 # @return [Request]
 jax.post = (url, data) ->
   options =
     type: 'POST'
     url: url
     data: data
+
+  return new Request options
+
+# Put request shorthand method.
+#
+# @param [String] url
+# @param [Object] data
+# @return [Request]
+jax.put = (url, data) ->
+  options =
+    type: 'PUT'
+    url: url
+    data: data
+
+  return new Request options
+
+# Delete request shorthand method.
+#
+# @param [String] url
+# @return [Request]
+jax.delete = (url) ->
+  options =
+    type: 'DELETE'
+    url : url
 
   return new Request options
 
