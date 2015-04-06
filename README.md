@@ -1,7 +1,7 @@
 jax.js ![build status](https://travis-ci.org/harryhope/jax.js.svg?branch=master)
 ===
 
-Jax is a tiny library for making ajax requests with an interface similar to angular's $http service.
+Jax is a tiny, dependency-free library for making ajax requests with an interface similar to Angular's $http service.
 
 ## Usage
 
@@ -32,3 +32,6 @@ jax.get('sample.json').then(callback);
 // POST
 jax.post('sample.json', data).then(callback);
 ```
+
+## Developing
+Use `grunt build` to compile and `grunt test` to run jasmine specs.
