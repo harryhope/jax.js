@@ -145,8 +145,7 @@ describe 'Jax', ->
     expect(request.method).toBe('PUT')
 
   it 'should use delete correctly', ->
-    data = {'test':'item'}
-    jax.delete('/test/url', data)
+    jax.delete('/test/url')
 
     request = jasmine.Ajax.requests.mostRecent()
     expect(request.method).toBe('DELETE')
