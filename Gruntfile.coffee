@@ -14,19 +14,11 @@ module.exports = (grunt) ->
 
     coffee:
       compile:
-        expand: true
-        flatten: true
-        cwd: "#{__dirname}/src/"
-        src: ['*.coffee']
-        dest: 'build/'
-        ext: '.js'
+        files:
+          'build/jax.js': 'src/jax.coffee'
       compileSpec:
-        expand: true
-        flatten: true
-        cwd: "#{__dirname}/spec/"
-        src: ['*.coffee']
-        dest: 'spec/'
-        ext: '.js'
+        files:
+          'spec/jax-spec.js': 'spec/jax-spec.coffee'
 
     coffeelint:
       build: ['src/*.coffee']
