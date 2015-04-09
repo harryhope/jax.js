@@ -5,15 +5,31 @@
   "scripts": {
     "test": "grunt test"
   },
+  "description": "jax.js ![build status](https://travis-ci.org/harryhope/jax.js.svg?branch=master) ===",
+  "main": "build/jax.js",
   "devDependencies": {
-    "coffeelint": "^1.6.1",
-    "grunt": "~0.4.2",
-    "grunt-coffeelint": "0.0.13",
+    "grunt": "^0.4.5",
+    "grunt-contrib-coffee": "^0.10.1",
     "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-jasmine": "^0.8.2",
+    "coffeelint": "^1.6.1",
+    "grunt-coffeelint": "^0.0.13",
     "grunt-contrib-uglify": "^0.7.0",
-    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-watch": "^0.5.3",
     "jasmine-ajax": "^3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harryhope/jax.git"
+  },
+  "keywords": [
+    "ajax",
+    "http",
+    "json"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harryhope/jax/issues"
+  },
+  "homepage": "https://github.com/harryhope/jax"
 }
