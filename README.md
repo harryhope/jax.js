@@ -23,7 +23,7 @@ There is also a third method, 'then', which takes a success handler as it's firs
 jax({type:'GET', url:'sample.json'}).then(doSomething, doSomethingElseOnFailure);
 ```
 
-Shorthand http verbs for `get`, `post`, `put`, and `delete` are also available
+Shorthand http verbs for `get`, `post`, `put`, `patch`, `head`, and `delete` are also available.
 
 ```
 // GET
