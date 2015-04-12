@@ -137,12 +137,25 @@ describe 'Jax', ->
     expect(request.method).toBe('POST')
     expect(request.data()).toEqual({name:[ 'lemon' ], type:[ 'fruit' ]})
 
+  it 'should use head correctly', ->
+    jax.head('/test/url')
+
+    request = jasmine.Ajax.requests.mostRecent()
+    expect(request.method).toBe('HEAD')
+
   it 'should use put correctly', ->
     data = {'test':'item'}
     jax.put('/test/url', data)
 
     request = jasmine.Ajax.requests.mostRecent()
     expect(request.method).toBe('PUT')
+
+  it 'should use patch correctly', ->
+    data = {'test':'item'}
+    jax.patch('/test/url', data)
+
+    request = jasmine.Ajax.requests.mostRecent()
+    expect(request.method).toBe('PATCH')
 
   it 'should use delete correctly', ->
     jax.delete('/test/url')

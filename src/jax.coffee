@@ -222,6 +222,19 @@ jax.put = (url, data) ->
 
   return new Request options
 
+# Patch request shorthand method.
+#
+# @param [String] url
+# @param [Object] data
+# @return [Request]
+jax.patch = (url, data) ->
+  options =
+    type: 'PATCH'
+    url: url
+    data: data
+
+  return new Request options
+
 # Delete request shorthand method.
 #
 # @param [String] url

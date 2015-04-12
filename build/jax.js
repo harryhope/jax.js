@@ -200,6 +200,16 @@
     return new Request(options);
   };
 
+  jax.patch = function(url, data) {
+    var options;
+    options = {
+      type: 'PATCH',
+      url: url,
+      data: data
+    };
+    return new Request(options);
+  };
+
   jax["delete"] = function(url) {
     var options;
     options = {
