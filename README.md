@@ -1,4 +1,4 @@
-jax.js ![build status](https://travis-ci.org/harryhope/jax.js.svg?branch=master)
+jax.js <a href="https://travis-ci.org/harryhope/jax.js"><img src="https://travis-ci.org/harryhope/jax.js.svg?branch=master" alt="Build status" /></a>
 ===
 
 Jax is a tiny, dependency-free library for making ajax requests with an interface similar to Angular's $http service.
