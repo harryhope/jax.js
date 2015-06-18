@@ -7,7 +7,7 @@ Jax is a tiny, dependency-free library for making ajax requests with an interfac
 
 As a function, jax takes a single argument and exposes success and fail methods for handling the response. The response as well as the raw XMLHttpRequest are available to use in the callbacks.
 
-```
+```javascript
 jax({type:'GET', url:'sample.json'})
     .success(function(response, fullRequest) {
       // Asynchronously called when a successful response is recieved.
@@ -19,13 +19,13 @@ jax({type:'GET', url:'sample.json'})
 
 There is also a third method, 'then', which takes a success handler as it's first parameter and (optionally) a failure handler as its second.
 
-```
+```javascript
 jax({type:'GET', url:'sample.json'}).then(doSomething, doSomethingElseOnFailure);
 ```
 
 Shorthand http verbs for `get`, `post`, `put`, `patch`, `head`, and `delete` are also available.
 
-```
+```javascript
 // GET
 jax.get('sample.json').then(callback);
 
