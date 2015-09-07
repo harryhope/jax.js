@@ -22,6 +22,25 @@ module.exports = (grunt) ->
 
     coffeelint:
       build: ['src/*.coffee']
+      options:
+        arrow_spacing: {level: 'error'}
+        ensure_comprehensions: {level: 'error'}
+        no_unnecessary_double_quotes: {level: 'error'}
+        no_trailing_whitespace: {level: 'error'}
+        no_empty_param_list: {level: 'error'}
+        spacing_after_comma: {level: 'error'}
+        no_stand_alone_at: {level: 'error'}
+        space_operators: {level: 'error'}
+        indentation:
+          value: 2
+          level: 'error'
+        cyclomatic_complexity:
+          value: 36
+          level: 'error'
+        max_line_length:
+          value: 120,
+          level: 'error'
+          limitComments: yes
 
     uglify:
       options:

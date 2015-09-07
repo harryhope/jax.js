@@ -147,7 +147,7 @@ parameterize = (input) ->
   else if typeof input is 'object'
     add(key, value) for own key, value of input
 
-  return result.join('&').replace(spaceChars,'+')
+  return result.join('&').replace(spaceChars, '+')
 
 # Merge properties of one object into another.
 #
