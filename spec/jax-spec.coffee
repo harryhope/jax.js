@@ -29,7 +29,7 @@ describe 'Jax', ->
       'responseText': 'mock server response.'
 
     jax.get('/test/url').success (data) ->
-       done(data)
+      done(data)
 
     expect(done).toHaveBeenCalledWith('mock server response.')
 
@@ -59,9 +59,9 @@ describe 'Jax', ->
       'responseText': 'mock server response.'
 
     jax.get('/test/url').success (data) ->
-        succeed(data)
-      .fail (data) ->
-        fail(data)
+      succeed(data)
+    .fail (data) ->
+      fail(data)
 
     expect(succeed).toHaveBeenCalledWith('mock server response.')
     expect(fail).not.toHaveBeenCalled()

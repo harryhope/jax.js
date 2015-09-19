@@ -21,7 +21,7 @@ module.exports = (grunt) ->
           'spec/jax-spec.js': 'spec/jax-spec.coffee'
 
     coffeelint:
-      build: ['src/*.coffee']
+      build: ['src/*.coffee', 'spec/*.coffee']
       options:
         arrow_spacing: {level: 'error'}
         ensure_comprehensions: {level: 'error'}
@@ -59,4 +59,10 @@ module.exports = (grunt) ->
       spec: ['spec/jax-spec.js']
 
   grunt.registerTask 'build', ['coffeelint', 'coffee:compile', 'uglify']
-  grunt.registerTask 'test', ['coffee:compileSpec', 'jasmine', 'clean:spec']
+  grunt.registerTask 'test', [
+    'coffeelint',
+    'clean:spec',
+    'coffee:compileSpec',
+    'jasmine',
+    'clean:spec'
+  ]
